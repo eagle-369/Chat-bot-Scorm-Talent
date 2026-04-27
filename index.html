@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot SCORM</title>
+
+  <script>
+    var scorm;
+
+    function initSCORM() {
+      scorm = window.API || window.parent.API;
+      if (scorm) {
+        scorm.LMSInitialize("");
+        scorm.LMSSetValue("cmi.core.lesson_status", "incomplete");
+      }
+    }
+
+    function finishSCORM() {
+      if (scorm) {
+        scorm.LMSSetValue("cmi.core.lesson_status", "completed");
+        scorm.LMSCommit("");
+        scorm.LMSFinish("");
+      }
+    }
+
+    window.onload = initSCORM;
+    window.onbeforeunload = finishSCORM;
+  </script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .card {
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      display: inline-block;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>🤖 Chat Inteligente</h1>
+    <p>Versión SCORM para TalentLMS</p>
+    <button onclick="abrirChat()">Abrir Chat</button>
+  </div>
+
+  <script>
+    function abrirChat() {
+      alert("El chatbot está abajo a la derecha 👉");
+
+      if (scorm) {
+        scorm.LMSSetValue("cmi.core.score.raw", "100");
+      }
+    }
+  </script>
+
+  <!-- Chatbase -->
+  <script>
+  (function(){
+    if(!window.chatbase||window.chatbase("getState")!=="initialized"){
+      window.chatbase=(...arguments)=>{
+        if(!window.chatbase.q){window.chatbase.q=[]}
+        window.chatbase.q.push(arguments)
+      };
+    }
+    const onLoad=function(){
+      const script=document.createElement("script");
+      script.src="https://www.chatbase.co/embed.min.js";
+      script.id="OV60CXSNfPhM5Vup3Pij5";
+      document.body.appendChild(script);
+    };
+    window.addEventListener("load", onLoad);
+  })();
+  </script>
+
+</body>
+</html>
